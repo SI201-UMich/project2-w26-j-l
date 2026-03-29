@@ -41,7 +41,40 @@ def load_listing_results(html_path) -> list[tuple]:
     # ==============================
     # YOUR CODE STARTS HERE
     # ==============================
-    pass
+def load_listing_results(html_path) -> list[tuple]:
+    """
+    Load file data from html_path and parse through it to find listing titles and listing ids.
+    """
+    with open(html_path, 'r', encoding='utf-8') as f:
+        soup = BeautifulSoup(f.read(), 'html.parser')
+    
+    results = []
+    seen_ids = set()
+    
+    title_divs = soup.find_all('div', {'data-testid': 'listing-card-title'})
+    
+    for title_div in title_divs:
+        title = title_div.get_text(strip=True)
+        
+        parent = title_div.parent
+        listing_id = None
+        
+        for _ in range(10):
+            if parent is None:
+                break
+            link = parent.find('a', href=re.compile(r'/rooms/'))
+            if link:
+                match = re.search(r'/rooms/(?:plus/)?(\d+)', link['href'])
+                if match:
+                    listing_id = match.group(1)
+                    break
+            parent = parent.parent
+        
+        if title and listing_id and listing_id not in seen_ids:
+            results.append((title, listing_id))
+            seen_ids.add(listing_id)
+    
+    return results
     # ==============================
     # YOUR CODE ENDS HERE
     # ==============================
