@@ -396,7 +396,26 @@ class TestCases(unittest.TestCase):
         # (listing_title, listing_id, policy_number, host_type, host_name, room_type, location_rating)
 
         # TODO: Spot-check the LAST tuple is ("Guest suite in Mission District", "467507", "STR-0005349", "Superhost", "Jennifer", "Entire Room", 4.8).
-        pass
+        detailed_data = create_listing_database('html_files/search_results.html')
+        for row in detailed_data: 
+            assert len(row) == 7, (
+                f"Expected 7 elements per row, got {len(row)}: {row}"
+            )
+ 
+        expected_last = (
+            "Guest suite in Mission District",
+            "467507",
+            "STR-0005349",
+            "Superhost",
+            "Jennifer",
+            "Entire Room",
+            4.8
+        )
+        assert detailed_data[-1] == expected_last, (
+            f"Last tuple mismatch:\n  Expected: {expected_last}\n  Got:      {detailed_data[-1]}"
+        )
+    
+
 
     def test_output_csv(self):
         out_path = os.path.join(self.base_dir, "test.csv")
