@@ -437,7 +437,7 @@ class TestCases(unittest.TestCase):
 
 
     def test_output_csv(self):
-        out_path = os.path.join(self.base_dir, "test.csv")
+        out_path = os.path.join(self.base_dir, "test_output.csv")
 
         # TODO: Call output_csv() to write the detailed_data to a CSV file.
         # TODO: Read the CSV back in and store rows in a list.
