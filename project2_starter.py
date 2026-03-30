@@ -179,7 +179,26 @@ def create_listing_database(html_path) -> list[tuple]:
     # ==============================
     # YOUR CODE STARTS HERE
     # ==============================
-    pass
+    listings = load_listing_results(html_path)
+ 
+    database = []
+ 
+    for listing_title, listing_id in listings:
+        details = get_listing_details(listing_id)
+        info = details[listing_id]
+ 
+        row = (
+            listing_title,
+            listing_id,
+            info['policy_number'],
+            info['host_type'],
+            info['host_name'],
+            info['room_type'],
+            info['location_rating'],
+        )
+        database.append(row)
+ 
+    return database
     # ==============================
     # YOUR CODE ENDS HERE
     # ==============================
@@ -464,7 +483,12 @@ class TestCases(unittest.TestCase):
     def test_validate_policy_numbers(self):
         # TODO: Call validate_policy_numbers() on detailed_data and save the result into a variable invalid_listings.
         # TODO: Check that the list contains exactly "16204265" for this dataset.
-        pass
+        detailed_data = create_listing_database('html_files/search_results.html')
+        invalid = validate_policy_numbers(detailed_data)
+    
+        assert invalid == ['16204265'], (
+            f"Expected ['16204265'], got {invalid}"
+        )
 
 
 def main():
