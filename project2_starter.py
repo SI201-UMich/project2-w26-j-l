@@ -347,7 +347,17 @@ class TestCases(unittest.TestCase):
     def test_load_listing_results(self):
         # TODO: Check that the number of listings extracted is 18.
         # TODO: Check that the FIRST (title, id) tuple is  ("Loft in Mission District", "1944564").
-        pass
+        results = load_listing_results('html_files/search_results.html')
+ 
+        assert len(results) == 18, (
+            f"Expected 18 listings, got {len(results)}"
+        )
+    
+        expected_first = ("Loft in Mission District", "1944564")
+        assert results[0] == expected_first, (
+            f"Expected {expected_first}, got {results[0]}"
+        )
+    
 
     def test_get_listing_details(self):
         html_list = ["467507", "1550913", "1944564", "4614763", "6092596"]
