@@ -30,20 +30,6 @@ If you are getting "encoding errors" while trying to open, read, or write from a
 def load_listing_results(html_path) -> list[tuple]:
     """
     Load file data from html_path and parse through it to find listing titles and listing ids.
-
-    Args:
-        html_path (str): The path to the HTML file containing the search results
-
-    Returns:
-        list[tuple]: A list of tuples containing (listing_title, listing_id)
-    """
-    # TODO: Implement checkout logic following the instructions
-    # ==============================
-    # YOUR CODE STARTS HERE
-    # ==============================
-def load_listing_results(html_path) -> list[tuple]:
-    """
-    Load file data from html_path and parse through it to find listing titles and listing ids.
     """
     with open(html_path, 'r', encoding='utf-8') as f:
         soup = BeautifulSoup(f.read(), 'html.parser')
@@ -103,7 +89,76 @@ def get_listing_details(listing_id) -> dict:
     # ==============================
     # YOUR CODE STARTS HERE
     # ==============================
-    pass
+    html_path = f'html_files/listing_{listing_id}.html'
+ 
+    with open(html_path, 'r', encoding='utf-8') as f:
+        soup = BeautifulSoup(f.read(), 'html.parser')
+ 
+    policy_number = 'Exempt'   
+ 
+    for li in soup.find_all('li'):
+        text = li.get_text(strip=True)    
+        if 'policy number' in text.lower():
+            raw = text.split(':', 1)[-1].strip() if ':' in text else ''
+ 
+            if not raw or 'exempt' in raw.lower():
+                policy_number = 'Exempt'
+            elif 'pending' in raw.lower():
+                policy_number = 'Pending'
+            else:
+                policy_number = raw   
+            break
+ 
+
+    page_text = soup.get_text()
+    host_type = 'Superhost' if 'Superhost' in page_text else 'regular'
+ 
+
+    host_name = None
+    for h2 in soup.find_all('h2'):
+        text = h2.get_text(strip=True)
+        if text.startswith('Hosted by'):
+            host_name = text.replace('Hosted by', '').strip()
+            break
+ 
+
+    room_type = 'Entire Room' 
+    for h2 in soup.find_all('h2'):
+        text = h2.get_text(strip=True)
+        if 'hosted by' in text.lower():
+            if 'Private' in text:
+                room_type = 'Private Room'
+            elif 'Shared' in text:
+                room_type = 'Shared Room'
+            else:
+                room_type = 'Entire Room'
+            break
+ 
+
+    location_rating = 0.0
+    
+    for div in soup.find_all('div'):
+        if div.get_text(strip=True) == 'Location':
+            parent = div.parent
+            if parent:
+                rating_div = parent.find(attrs={'aria-label': re.compile(r'\d+\.?\d*\s+out of')})
+                if rating_div:
+                    aria = rating_div.get('aria-label', '')
+                    match = re.search(r'([\d.]+)\s+out of', aria)
+                    if match:
+                        location_rating = float(match.group(1))
+                        break
+ 
+    return {
+        listing_id: {
+            'policy_number'   : policy_number,
+            'host_type'       : host_type,
+            'host_name'       : host_name,
+            'room_type'       : room_type,
+            'location_rating' : location_rating,
+        }
+    }
+
     # ==============================
     # YOUR CODE ENDS HERE
     # ==============================
