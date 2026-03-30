@@ -368,7 +368,28 @@ class TestCases(unittest.TestCase):
         # 1) Check that listing 467507 has the correct policy number "STR-0005349".
         # 2) Check that listing 1944564 has the correct host type "Superhost" and room type "Entire Room".
         # 3) Check that listing 1944564 has the correct location rating 4.9.
-        pass
+        listing_ids = [row[1] for row in load_listing_results('html_files/search_results.html')]
+    
+        for lid in listing_ids:
+            get_listing_details(lid)
+    
+        r467 = get_listing_details('467507')
+        assert r467['467507']['policy_number'] == 'STR-0005349', (
+            f"Expected 'STR-0005349', got {r467['467507']['policy_number']}"
+        )
+    
+        r194 = get_listing_details('1944564')
+        assert r194['1944564']['host_type'] == 'Superhost', (
+            f"Expected 'Superhost', got {r194['1944564']['host_type']}"
+        )
+        assert r194['1944564']['room_type'] == 'Entire Room', (
+            f"Expected 'Entire Room', got {r194['1944564']['room_type']}"
+        )
+    
+        assert r194['1944564']['location_rating'] == 4.9, (
+            f"Expected 4.9, got {r194['1944564']['location_rating']}"
+        )
+    
 
     def test_create_listing_database(self):
         # TODO: Check that each tuple in detailed_data has exactly 7 elements:
