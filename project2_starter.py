@@ -424,6 +424,32 @@ class TestCases(unittest.TestCase):
         # TODO: Read the CSV back in and store rows in a list.
         # TODO: Check that the first data row matches ["Guesthouse in San Francisco", "49591060", "STR-0000253", "Superhost", "Ingrid", "Entire Room", "5.0"].
 
+        
+        detailed_data = create_listing_database('html_files/search_results.html')
+        output_csv(detailed_data, 'test_output.csv')
+
+        rows = []
+        with open('test_output.csv', 'r', encoding='utf-8') as f:
+            reader = csv.reader(f)
+            next(reader)   # Skip the header row
+            for row in reader:
+                rows.append(row)
+    
+        expected_first_row = [
+            "Guesthouse in San Francisco",
+            "49591060",
+            "STR-0000253",
+            "Superhost",
+            "Ingrid",
+            "Entire Room",
+            "5.0"
+        ]
+        assert rows[0] == expected_first_row, (
+            f"First CSV row mismatch:\n  Expected: {expected_first_row}\n  Got:      {rows[0]}"
+        )
+    
+
+
         os.remove(out_path)
 
     def test_avg_location_rating_by_room_type(self):
