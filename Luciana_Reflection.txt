@@ -1,0 +1,59 @@
+* Do you think this current system provides adequate accountability around short-term
+rentals in San Francisco? In your response, describe why you believe the system is
+adequate or inadequate. If you believe the system is inadequate, discuss a possible
+change in actions required to improve accountability in this system. You may refer to the
+SWE Code of Ethics as you think through your response.
+
+I personally think that the current system does provide some level of accountability, and while there are
+some problems I do want to address I feel like the current system is the best we are going to get realistically.
+One of the problems I did want to mention though is how hosts are required to register with the city's planning office, 
+and Airbnb is supposed to display the information for each listing but enforcement mostly relies on the citizens
+oversight and third-party monitoring. This idea and system makes it possible for noncompliant hosts to list properties
+without immediate consequences.One thing we could do is make the city implement like a verification system and force Airbnb
+to validate registration before a listing goes live, that way they can ensure that uncompliant hosts don't find cheat codes.
+This idea would also align with the SWE Code of Ethics!
+
+
+
+
+* As discussed in the introduction, the legality of web scraping is still uncertain in the US.
+Skim through the Legal Issues section of Web Scraping in the US on Wikipedia and this
+article about the legal issues with the Computer Fraud and Abuse Act, and describe at
+least one factor you believe is important to consider when discussing the legality of web
+scraping and why.
+
+One important factor I found pretty important, which was mentioned in the "Computer Fraud and
+Abuse Act" was the way the CFAA mentions some of it's rules. They mention that it's a crime to
+"access a computer without authorization" in a manner that "exceeds authorization", but like the
+article says the law diesn't really make it clear what exactly these phrases mean. This means people
+could take advantage of this ambiguous meaning. This also means it could be taken the wrong way,
+thus even is some data is publicly accessible on a website, scraping it in ways that bypass some security
+measures or that violate that website's terms of service could be considered illegal. This ambiguity 
+on the rules can cause a lot of problems when web scraping. Overall, I think when conducting web scraping
+it's very important to make sure you check the website's rules and terms of service and ensure that there
+are no legal restrictions or essential things to avoid potential civil/criminal liability. 
+
+
+
+* Scraping public data does not always lead to positive results for society. For example,
+look to Facebook–Cambridge Analytica data scandal - Wikipedia or Clearview AI -
+Wikipedia. Many argue that using someone’s personal data without their consent (even if
+publicly provided) is unethical. Web scraping requires thoughtful intervention. Develop at
+least two guidelines you think are important to consider when deciding whether to do
+web scraping.
+
+First of all, I feel like one of the most important guidelines to have is Transparency and 
+Accountability. I believe that researchers, students, teachers, and anyone using public data 
+should document their methods and cite all their sources. It's good to ensure that the data 
+collected is used for legitimate purposes rather than exploitation. Second of all, I think a 
+good important guideline to follow is to ensure that the web scraping that you perform doesn't  
+provide any harm to others and that is respects others privacy. I feel like this is very important
+to remember as public data may contain information that could be sensitive information about individuals. 
+Web scraping should focus on avoiding collecting unnecessary personal details about people and should
+anonymize or aggregate results when possible! I believe following these 2 guidelines could help 
+maintain more public trust.
+
+
+
+
+
