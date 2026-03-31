@@ -1,14 +1,19 @@
 # SI 201 HW4 (Library Checkout System)
-# Your name:
-# Your student id:
-# Your email:
-# Who or what you worked with on this homework (including generative AI like ChatGPT):
+# Your name: Luciana Lacroix and Jessica Kozyra
+# Your student id:3867 8419/ 
+# Your email: lucianal@umich.edu/jkozyra@umich.edu
+# Who or what you worked with on this homework (including generative AI like ChatGPT): Worked with each other, but also used AI
+#when we needed help with debugging, especially when output was coming out a bit odd. We also ended up asking AI if the fact
+#that we were getting 0.0 for some of the location ratings meant that we were doing something wrong in our code, but the instructions said
+#it was normal. AI was also used to double check with rubric requirements to make sure we were hitting all points. Sometimes it would suggest
+#wats to structure code that we hadn't thought of, but we would mostly end up sticking with our original code if it still ended up working. 
 # If you worked with generative AI also add a statement for how you used it.
-# e.g.:
+# e.g.: Already explauned above. 
 # Asked ChatGPT for hints on debugging and for suggestions on overall code structure
 #
 # Did your use of GenAI on this assignment align with your goals and guidelines in your Gen AI contract? If not, why?
-#
+#Yes it did! We stuck to our guidelines and goals, and only used GenAI for debugging help and to double check rubric, we also did make sure
+#to double check code if we did end up taking any suggestions just to make sure it still aligned with out guidelines. 
 # --- ARGUMENTS & EXPECTED RETURN VALUES PROVIDED --- #
 # --- SEE INSTRUCTIONS FOR FULL DETAILS ON METHOD IMPLEMENTATION --- #
 
