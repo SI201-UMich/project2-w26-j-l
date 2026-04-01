@@ -119,7 +119,7 @@ def get_listing_details(listing_id) -> dict:
     host_type = 'Superhost' if 'Superhost' in page_text else 'regular'
  
 
-    host_name = None
+    host_name = ""
     for h2 in soup.find_all('h2'):
         text = h2.get_text(strip=True)
         if text.startswith('Hosted by'):
@@ -127,17 +127,18 @@ def get_listing_details(listing_id) -> dict:
             break
  
 
-    room_type = 'Entire Room' 
-    for h2 in soup.find_all('h2'):
-        text = h2.get_text(strip=True)
-        if 'hosted by' in text.lower():
-            if 'Private' in text:
-                room_type = 'Private Room'
-            elif 'Shared' in text:
-                room_type = 'Shared Room'
-            else:
-                room_type = 'Entire Room'
-            break
+    room_type = 'Entire Room'
+    subtitle = soup.find('h2')
+    if subtitle:
+        text = subtitle.get_text()
+
+        if 'Private' in text:
+            room_type = 'Private Room'
+        elif 'Shared' in text:
+            room_type = 'Shared Room'
+        else:
+            room_type = 'Entire Room' 
+    
  
 
     location_rating = 0.0
@@ -372,19 +373,15 @@ class TestCases(unittest.TestCase):
         # TODO: Check that the number of listings extracted is 18.
         # TODO: Check that the FIRST (title, id) tuple is  ("Loft in Mission District", "1944564").
         results = load_listing_results('html_files/search_results.html')
- 
-        assert len(results) == 18, (
-            f"Expected 18 listings, got {len(results)}"
-        )
-    
+
+        self.assertEqual(len(results), 18)
+
         expected_first = ("Loft in Mission District", "1944564")
-        assert results[0] == expected_first, (
-            f"Expected {expected_first}, got {results[0]}"
-        )
+        self.assertEqual(results[0], expected_first)
     
 
     def test_get_listing_details(self):
-        html_list = ["467507", "1550913", "1944564", "4614763", "6092596"]
+        
 
         # TODO: Call get_listing_details() on each listing id above and save results in a list.
 
@@ -392,27 +389,17 @@ class TestCases(unittest.TestCase):
         # 1) Check that listing 467507 has the correct policy number "STR-0005349".
         # 2) Check that listing 1944564 has the correct host type "Superhost" and room type "Entire Room".
         # 3) Check that listing 1944564 has the correct location rating 4.9.
-        listing_ids = [row[1] for row in load_listing_results('html_files/search_results.html')]
-    
-        for lid in listing_ids:
-            get_listing_details(lid)
-    
+        listing_ids = ["467507", "1550913", "1944564", "4614763", "6092596"]
+
+        results = [get_listing_details(lid) for lid in listing_ids]
+
         r467 = get_listing_details('467507')
-        assert r467['467507']['policy_number'] == 'STR-0005349', (
-            f"Expected 'STR-0005349', got {r467['467507']['policy_number']}"
-        )
-    
+        self.assertEqual(r467['467507']['policy_number'], 'STR-0005349')
+
         r194 = get_listing_details('1944564')
-        assert r194['1944564']['host_type'] == 'Superhost', (
-            f"Expected 'Superhost', got {r194['1944564']['host_type']}"
-        )
-        assert r194['1944564']['room_type'] == 'Entire Room', (
-            f"Expected 'Entire Room', got {r194['1944564']['room_type']}"
-        )
-    
-        assert r194['1944564']['location_rating'] == 4.9, (
-            f"Expected 4.9, got {r194['1944564']['location_rating']}"
-        )
+        self.assertEqual(r194['1944564']['host_type'], 'Superhost')
+        self.assertEqual(r194['1944564']['room_type'], 'Entire Room')
+        self.assertEqual(r194['1944564']['location_rating'], 4.9)
     
 
     def test_create_listing_database(self):
@@ -421,11 +408,10 @@ class TestCases(unittest.TestCase):
 
         # TODO: Spot-check the LAST tuple is ("Guest suite in Mission District", "467507", "STR-0005349", "Superhost", "Jennifer", "Entire Room", 4.8).
         detailed_data = create_listing_database('html_files/search_results.html')
-        for row in detailed_data: 
-            assert len(row) == 7, (
-                f"Expected 7 elements per row, got {len(row)}: {row}"
-            )
- 
+
+        for row in detailed_data:
+            self.assertEqual(len(row), 7)
+
         expected_last = (
             "Guest suite in Mission District",
             "467507",
@@ -435,30 +421,30 @@ class TestCases(unittest.TestCase):
             "Entire Room",
             4.8
         )
-        assert detailed_data[-1] == expected_last, (
-            f"Last tuple mismatch:\n  Expected: {expected_last}\n  Got:      {detailed_data[-1]}"
-        )
+        self.assertEqual(detailed_data[-1], expected_last)
     
 
 
     def test_output_csv(self):
-        out_path = os.path.join(self.base_dir, "test_output.csv")
+        
 
         # TODO: Call output_csv() to write the detailed_data to a CSV file.
         # TODO: Read the CSV back in and store rows in a list.
         # TODO: Check that the first data row matches ["Guesthouse in San Francisco", "49591060", "STR-0000253", "Superhost", "Ingrid", "Entire Room", "5.0"].
 
         
+        out_path = os.path.join(self.base_dir, "test_output.csv")
+
         detailed_data = create_listing_database('html_files/search_results.html')
-        output_csv(detailed_data, 'test_output.csv')
+        output_csv(detailed_data, out_path)
 
         rows = []
-        with open('test_output.csv', 'r', encoding='utf-8') as f:
+        with open(out_path, 'r', encoding='utf-8') as f:
             reader = csv.reader(f)
-            next(reader)   # Skip the header row
+            next(reader)
             for row in reader:
                 rows.append(row)
-    
+
         expected_first_row = [
             "Guesthouse in San Francisco",
             "49591060",
@@ -468,11 +454,8 @@ class TestCases(unittest.TestCase):
             "Entire Room",
             "5.0"
         ]
-        assert rows[0] == expected_first_row, (
-            f"First CSV row mismatch:\n  Expected: {expected_first_row}\n  Got:      {rows[0]}"
-        )
-    
 
+        self.assertEqual(rows[0], expected_first_row)
 
         os.remove(out_path)
 
@@ -481,19 +464,17 @@ class TestCases(unittest.TestCase):
         # TODO: Check that the average for "Private Room" is 4.9.
         detailed_data = create_listing_database('html_files/search_results.html')
         averages = avg_location_rating_by_room_type(detailed_data)
- 
-        assert averages.get('Private Room') == 4.9, (
-        f"Expected 4.9 for 'Private Room', got {averages.get('Private Room')}")
+
+        self.assertEqual(averages.get('Private Room'), 4.9)
 
     def test_validate_policy_numbers(self):
         # TODO: Call validate_policy_numbers() on detailed_data and save the result into a variable invalid_listings.
         # TODO: Check that the list contains exactly "16204265" for this dataset.
         detailed_data = create_listing_database('html_files/search_results.html')
         invalid = validate_policy_numbers(detailed_data)
-    
-        assert invalid == ['16204265'], (
-            f"Expected ['16204265'], got {invalid}"
-        )
+
+        self.assertEqual(invalid, ['16204265'])
+
 
 
 def main():
