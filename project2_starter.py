@@ -3,7 +3,7 @@
 # Your student id:3867 8419/ 
 # Your email: lucianal@umich.edu/jkozyra@umich.edu
 # Who or what you worked with on this homework (including generative AI like ChatGPT): Worked with each other, but also used AI
-#when we needed help with debugging, especially when output was coming out a bit odd. We also ended up asking AI if the fact
+# when we needed help with debugging, especially when output was coming out a bit odd. We also ended up asking AI if the fact
 #that we were getting 0.0 for some of the location ratings meant that we were doing something wrong in our code, but the instructions said
 #it was normal. AI was also used to double check with rubric requirements to make sure we were hitting all points. Sometimes it would suggest
 #wats to structure code that we hadn't thought of, but we would mostly end up sticking with our original code if it still ended up working. 
