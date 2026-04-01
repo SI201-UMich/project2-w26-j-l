@@ -128,16 +128,20 @@ def get_listing_details(listing_id) -> dict:
  
 
     room_type = 'Entire Room'
+
     subtitle = soup.find('h2')
     if subtitle:
         text = subtitle.get_text()
+    
 
         if 'Private' in text:
             room_type = 'Private Room'
+            
         elif 'Shared' in text:
             room_type = 'Shared Room'
         else:
-            room_type = 'Entire Room' 
+            room_type = 'Entire Room'
+         
     
  
 
@@ -392,7 +396,7 @@ class TestCases(unittest.TestCase):
         listing_ids = ["467507", "1550913", "1944564", "4614763", "6092596"]
 
         results = [get_listing_details(lid) for lid in listing_ids]
-
+        
         r467 = get_listing_details('467507')
         self.assertEqual(r467['467507']['policy_number'], 'STR-0005349')
 
