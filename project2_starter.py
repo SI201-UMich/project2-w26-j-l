@@ -1,6 +1,6 @@
 # SI 201 HW4 (Library Checkout System)
 # Your name: Luciana Lacroix and Jessica Kozyra
-# Your student id:3867 8419/ 
+# Your student id:3867 8419/71221230
 # Your email: lucianal@umich.edu/jkozyra@umich.edu
 # Who or what you worked with on this homework (including generative AI like ChatGPT): Worked with each other, but also used AI
 #when we needed help with debugging, especially when output was coming out a bit odd. We also ended up asking AI if the fact
