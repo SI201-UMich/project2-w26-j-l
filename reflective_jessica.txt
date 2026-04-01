@@ -1,0 +1,80 @@
+1. Do you think this current system provides adequate accountability around short-term
+rentals in San Francisco? In your response, describe why you believe the system is
+adequate or inadequate. If you believe the system is inadequate, discuss a possible
+change in actions required to improve accountability in this system. You may refer to the
+SWE Code of Ethics as you think through your response.
+
+I don't think the current system for regulating short-term rentals in
+San Francisco is adequate. The biggest issue I see is that the
+government only investigates listings after someone files a complaint.
+That puts all the responsibility on regular people or independent
+investigators to catch hosts who aren't following the rules rather than
+the platform or agency. Most people browsing Airbnb would not know how
+to identify an invalid policy number or recognize when a host is
+operating without proper registration. This means violations can persist
+for extended periods before anyone notices or takes action. Principle 1
+of the Software Engineering Code of Ethics states that software
+engineers should act in the public interest. In my opinion, the current
+system fails this standard because it doesn't use technology to protect
+the public from housing shortages caused by unlicensed short-term
+rentals. A more effective approach would require Airbnb to verify policy
+numbers against the city's official database before allowing a listing
+to be published. This would shift accountability to the platform, which
+has the technical capability to automate compliance checks, rather than
+expecting a third party to perform investigative work.
+
+2. As discussed in the introduction, the legality of web scraping is still uncertain in the US.
+Skim through the Legal Issues section of Web Scraping in the US on Wikipedia and this
+article about the legal issues with the Computer Fraud and Abuse Act, and describe at
+least one factor you believe is important to consider when discussing the legality of web
+scraping and why.
+
+One important factor to consider when discussing the legality of web
+scraping is the distinction between accessing publicly available
+information and bypassing technical barriers intended to restrict
+access. After reviewing the Wikipedia article on web scraping legality
+and the article about the Computer Fraud and Abuse Act, I found that the
+law remains unclear on this issue. The CFAA uses language about
+"exceeding authorized access," but this becomes difficult to interpret
+when the data in question is visible to anyone who visits a webpage
+without logging in or bypassing any security measures. This distinction
+matters because it determines whether scraping constitutes unauthorized
+access or simply collecting information that is already publicly
+displayed. If violating a website's Terms of Service were enough to
+trigger legal consequences, companies could effectively prevent any
+outside scrutiny of their platforms, even for purposes that serve the
+public interest. For accountability projects like this one, where the
+goal is to verify compliance with housing regulations, the legal
+uncertainty creates challenges. I believe the law should more clearly
+protect scraping of genuinely public data while still prohibiting
+activities that involve hacking or causing harm to a website's
+operations.
+
+3. Scraping public data does not always lead to positive results for society. For example,
+look to Facebook–Cambridge Analytica data scandal - Wikipedia or Clearview AI -
+Wikipedia. Many argue that using someone’s personal data without their consent (even if
+publicly provided) is unethical. Web scraping requires thoughtful intervention. Develop at
+least two guidelines you think are important to consider when deciding whether to do
+web scraping.
+
+The first guideline I think is important to consider when deciding
+whether to do web scraping is to collect only the data that is actually
+necessary for your purpose. Even when information is publicly
+accessible, individuals may not expect that data to be collected and
+analyzed at a large scale. The Cambridge Analytica scandal is a good
+example of this problem. Users shared information on Facebook in a
+social context, not anticipating that it would be harvested and used for
+political targeting. For any scraping project, the question of what is
+the minimum amount of data required to achieve a legitimate purpose
+should be asked. The second guideline I think is important is to
+consider the potential for misuse before collecting any data. The
+Clearview AI case demonstrates the dangers of large-scale data
+collection without adequate consideration of consequences. By scraping
+billions of publicly posted photos to build a facial recognition
+database, the company created a tool that can be used for surveillance
+and tracking in ways that the people in those photos never consented to.
+Before beginning a scraping project, it is worth asking what harm could
+result if the data were leaked or used for something other than its
+original intent. If the potential for misuse is significant, additional
+safeguards should be implemented, or the project should be reconsidered
+entirely.
